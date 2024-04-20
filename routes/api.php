@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/company/create',[CompanyController::class,'store']);
 Route::post('/company/update/{id}',[CompanyController::class,'update']);
+Route::post('/company/{id}/delete',[CompanyController::class,'delete']);
