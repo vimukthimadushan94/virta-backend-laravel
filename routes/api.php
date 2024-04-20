@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/company/create',[CompanyController::class,'store']);
+Route::post('/company/update/{id}',[CompanyController::class,'update']);
