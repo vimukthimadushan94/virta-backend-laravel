@@ -44,7 +44,7 @@ class StationRepository
                         'longitude' => $station->longitude,
                         'company_id' => $station->company_id,
                         'address' => $station->address,
-                        'company' => $station->company()->get(),
+                        'company' => $station->company()->first(),
                     ];
                 })->toArray(),
             ];

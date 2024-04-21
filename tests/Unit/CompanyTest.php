@@ -40,7 +40,7 @@ class CompanyTest extends TestCase
 
         $updateData = [
             'name' => 'Updated Company Name',
-            'parent_company_id' => null, // Example value
+            'parent_company_id' => null,
         ];
 
         $response = $this->putJson('/api/company/' . $company->id, $updateData);

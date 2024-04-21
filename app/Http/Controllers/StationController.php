@@ -59,7 +59,7 @@ class StationController extends Controller
     public function store(StoreStationRequest $request)
     {
         $station = Station::create($request->all());
-        return response()->json($station);
+        return response()->json($station,201);
     }
 
     /**
