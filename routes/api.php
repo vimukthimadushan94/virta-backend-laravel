@@ -9,10 +9,15 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/company/create',[CompanyController::class,'store']);
-Route::post('/company/update/{id}',[CompanyController::class,'update']);
-Route::post('/company/{id}/delete',[CompanyController::class,'delete']);
+Route::controller(CompanyController::class)->prefix('company')->group(function () {
+    Route::get('/create', 'store');
+    Route::post('/update/{id}', 'update');
+    Route::post('/{id}/delete', 'delete');
+});
 
-Route::post('/station/create',[StationController::class,'store']);
-Route::put('/station/update/{id}',[StationController::class,'update']);
-Route::delete('/station/{id}/delete',[StationController::class,'delete']);
+Route::controller(StationController::class)->prefix('station')->group(function () {
+    Route::get('/create', 'store');
+    Route::post('/update/{id}', 'update');
+    Route::post('/{id}/delete', 'delete');
+    Route::get('/get-by-range', 'getStationsWithinRadius');
+});
