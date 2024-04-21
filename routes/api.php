@@ -10,9 +10,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::controller(CompanyController::class)->prefix('company')->group(function () {
-    Route::post('/create', 'store');
-    Route::put('/update/{id}', 'update');
-    Route::delete('/{id}/delete', 'delete');
+    Route::post('/', 'store');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
 });
 
 Route::controller(StationController::class)->prefix('station')->group(function () {

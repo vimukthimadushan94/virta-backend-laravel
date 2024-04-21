@@ -26,8 +26,8 @@ class StationController extends Controller
     /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="Your API",
-     *      description="API for creating stations",
+     *      title="APIs for Virta",
+     *      description="API for companies and stations",
      *      @OA\Contact(
      *          email="madushan.gangoda94@gmail.com"
      *      ),

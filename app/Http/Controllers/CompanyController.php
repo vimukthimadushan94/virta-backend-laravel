@@ -10,12 +10,61 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CompanyController extends Controller
 {
+
+    /**
+     * @param StoreCompanyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Post(
+     *     path="/api/company",
+     *     summary="Create a new company",
+     *     tags={"Company"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Company data",
+     *         @OA\JsonContent(
+     *             required={ "name"},
+     *             @OA\Property(property="parent_company_id", type="integer", example="1"),
+     *             @OA\Property(property="name", type="string", example="Company A")
+     *         ),
+     *     ),
+     *     @OA\Response(response=201, description="Company created successfully"),
+     *     @OA\Response(response=400, description="Invalid data provided")
+     * )
+     */
     public function store(StoreCompanyRequest $request)
     {
         $company = Company::create($request->all());
         return response()->json($company);
     }
 
+
+    /**
+     * @OA\Put(
+     *     path="/api/company/{id}",
+     *     summary="Update an existing company",
+     *     tags={"Company"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="ID of the company to update",
+     *          required=true,
+     *          @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Company data",
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="parent_company_id", type="integer", example="1"),
+     *             @OA\Property(property="name", type="string", example="Updated Company A"),
+     *         ),
+     *     ),
+     *     @OA\Response(response=200, description="Company updated successfully"),
+     *     @OA\Response(response=400, description="Invalid data provided"),
+     *     @OA\Response(response=404, description="Company not found")
+     * )
+     */
     public function update(UpdateCompanyRequest $request, $id)
     {
         try {
@@ -28,6 +77,25 @@ class CompanyController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Delete(
+     *     path="/api/company/{id}",
+     *     summary="Delete a company",
+     *     tags={"Company"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="ID of the company to delete",
+     *          required=true,
+     *          @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=204, description="Company deleted successfully"),
+     *     @OA\Response(response=404, description="Company not found")
+     * )
+     */
     public function delete($id)
     {
         try {
