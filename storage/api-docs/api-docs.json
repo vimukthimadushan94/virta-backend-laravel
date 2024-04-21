@@ -1,0 +1,230 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your API",
+        "description": "API for creating stations",
+        "contact": {
+            "email": "madushan.gangoda94@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/station": {
+            "post": {
+                "tags": [
+                    "Station"
+                ],
+                "summary": "Create a new station",
+                "operationId": "75610cdd1a39f87c35d6abd82d96b7db",
+                "requestBody": {
+                    "description": "Station data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "company_id",
+                                    "name",
+                                    "latitude",
+                                    "longitude"
+                                ],
+                                "properties": {
+                                    "company_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Station A"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "61.489180"
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "23.755233"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "6a isokatu Helsinki",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Station created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid data provided"
+                    }
+                }
+            }
+        },
+        "/api/station/{id}": {
+            "put": {
+                "tags": [
+                    "Station"
+                ],
+                "summary": "Update an existing station",
+                "operationId": "3ad41ff3786a767a6bf8a77b22986398",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the station to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Station data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "company_id",
+                                    "name",
+                                    "latitude",
+                                    "longitude"
+                                ],
+                                "properties": {
+                                    "company_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated Station A"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "61.489180"
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "23.755233"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "yliopistokatu oulu",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Station updated successfully"
+                    },
+                    "400": {
+                        "description": "Invalid data provided"
+                    },
+                    "404": {
+                        "description": "Station not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Station"
+                ],
+                "summary": "Delete a station",
+                "operationId": "3c37a4c523a36b7a5234313256addfa9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the station to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Station deleted successfully"
+                    },
+                    "404": {
+                        "description": "Station not found"
+                    }
+                }
+            }
+        },
+        "/api/station/get-by-range": {
+            "get": {
+                "tags": [
+                    "Station"
+                ],
+                "summary": "Get a list of stations",
+                "operationId": "8053cb3bff36e8a1ae992c79b2354155",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude of the location",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude of the location",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "radius",
+                        "in": "query",
+                        "description": "Search radius in kilo meters",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "company_id",
+                        "in": "query",
+                        "description": "Company ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Station not found. Please provide location and range attributes"
+                    }
+                }
+            }
+        }
+    }
+}
