@@ -106,4 +106,9 @@ class CompanyController extends Controller
             return response()->json(['error' => 'Company not found'], 404);
         }
     }
+
+    public function getAllCompanies()
+    {
+        return Company::all();
+    }
 }

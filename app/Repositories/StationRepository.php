@@ -11,7 +11,6 @@ class StationRepository
     {
 
         $childCompanyIds = $this->getChildCompanyIds($companyId);
-        $stationIds = Station::whereIn('company_id', $childCompanyIds)->pluck('id');
 
         $stations = Station::selectRaw("*,
                     ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) )
@@ -20,9 +19,8 @@ class StationRepository
                     ) AS distance", [$latitude, $longitude, $latitude])
             ->having('distance', '<', $radius)
             ->orderBy('distance');
-
-        if($stationIds){
-            $stations = $stations->whereIn('id', $stationIds)->get();
+        if(!empty($childCompanyIds)){
+            $stations = $stations->whereIn('company_id', $childCompanyIds)->get();
         }else{
             $stations = $stations->get();
         }

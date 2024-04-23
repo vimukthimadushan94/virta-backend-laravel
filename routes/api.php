@@ -13,6 +13,7 @@ Route::controller(CompanyController::class)->prefix('company')->group(function (
     Route::post('/', 'store');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
+    Route::get('/','getAllCompanies');
 });
 
 Route::controller(StationController::class)->prefix('station')->group(function () {

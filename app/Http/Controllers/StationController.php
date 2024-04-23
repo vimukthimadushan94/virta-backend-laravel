@@ -181,10 +181,10 @@ class StationController extends Controller
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
-        $radius = $request->input('radius');
+        $radius = $request->input('radius',1000);
         $companyId = $request->input('company_id');
 
-        if(isset($latitude) && isset($longitude) && isset($radius)){
+        if(isset($latitude) && isset($longitude)){
             $groupedStations = $this->stationRepository->getStations($latitude,$longitude,$radius,$companyId);
             return response()->json($groupedStations);
         }else{
