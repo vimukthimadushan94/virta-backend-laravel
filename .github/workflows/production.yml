@@ -21,6 +21,13 @@ jobs:
       - name: Build Docker Image
         run: |
           sudo docker-compose build laravel.test
+        env:
+          WWWGROUP: '1000'
+          WWWUSER: '1000'
+          PWD: ${{ github.workspace }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
 
       - name: Authenticate with AWS
         uses: aws-actions/configure-aws-credentials@v2
