@@ -13,10 +13,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-#      - name: Install Docker
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y docker.io
+      - name: Set up PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.3'
+
+      - name: Install Composer Dependencies
+          run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Build Docker Image
         run: |
