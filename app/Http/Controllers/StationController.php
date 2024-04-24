@@ -193,6 +193,10 @@ class StationController extends Controller
 
     }
 
+    public function getAllStations()
+    {
+        return Station::all();
+    }
 
 
 }

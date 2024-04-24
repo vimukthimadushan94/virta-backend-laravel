@@ -21,4 +21,5 @@ Route::controller(StationController::class)->prefix('station')->group(function (
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
     Route::get('/get-by-range', 'getStationsWithinRadius');
+    Route::get('/get-all', 'getAllStations');
 });
