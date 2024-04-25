@@ -41,7 +41,7 @@ jobs:
 
       - name: Login to Amazon ECR
         run: |
-          aws ecr get-login-password --region eu-north-1 | sudo docker login --username AWS --password-stdin public.ecr.aws/a0s1s2l1/virta-app.dkr.ecr.eu-north-1.amazonaws.com
+          aws ecr-public get-login-password --region eu-north-1 | sudo docker login --username AWS --password-stdin public.ecr.aws/a0s1s2l1/virta-app.dkr.ecr.eu-north-1.amazonaws.com
 
       - name: Push Docker Image to Amazon ECR
         run: |
@@ -54,4 +54,4 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --targets "Key=instanceids,Values=i-06a07a8ecf09883d3" \
             --parameters commands="sudo docker pull 803173373286.dkr.ecr.eu-north-1.amazonaws.com/laravel-app:latest && sudo docker-compose -f /var/www/html/docker-compose.yml up -d" \
-            --region your-aws-region
+            --region eu-north-1
