@@ -45,8 +45,8 @@ jobs:
 
       - name: Push Docker Image to Amazon ECR
         run: |
-          docker tag virta-app:latest public.ecr.aws/a0s1s2l1/virta-app:latest
+          docker tag laravel.test:latest public.ecr.aws/a0s1s2l1/laravel.test:latest
 
       - name: Deploy to AWS EC2 via AWS Systems Manager Run Command
         run: |
-          docker push public.ecr.aws/a0s1s2l1/virta-app:latest
+          docker push public.ecr.aws/a0s1s2l1/laravel.test:latest
