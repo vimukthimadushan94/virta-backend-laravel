@@ -23,7 +23,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          sudo docker-compose build laravel.test
+          sudo docker-compose build virta-app
         env:
           WWWGROUP: '1000'
           WWWUSER: '1000'
@@ -45,13 +45,8 @@ jobs:
 
       - name: Push Docker Image to Amazon ECR
         run: |
-          sudo docker tag sail-8.3/app:latest 803173373286.dkr.ecr.eu-north-1.amazonaws.com/laravel-app:latest
-          sudo docker push 803173373286.dkr.ecr.eu-north-1.amazonaws.com/laravel-app:latest
+          docker tag virta-app:latest public.ecr.aws/a0s1s2l1/virta-app:latest
 
       - name: Deploy to AWS EC2 via AWS Systems Manager Run Command
         run: |
-          aws ssm send-command \
-            --document-name "AWS-RunShellScript" \
-            --targets "Key=instanceids,Values=i-06a07a8ecf09883d3" \
-            --parameters commands="sudo docker pull 803173373286.dkr.ecr.eu-north-1.amazonaws.com/laravel-app:latest && sudo docker-compose -f /var/www/html/docker-compose.yml up -d" \
-            --region eu-north-1
+          docker push public.ecr.aws/a0s1s2l1/virta-app:latest
