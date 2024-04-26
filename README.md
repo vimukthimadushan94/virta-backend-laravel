@@ -10,7 +10,7 @@
 ## Overview
 
 This repository contains a Laravel application configured to run with Docker using Laravel Sail.
-
+- Note:- Backend API Documentation deployed in AWS - http://13.60.22.151/api/documentation
 ## Prerequisites
 Before you begin, ensure you have the following installed on your local machine:
   - Docker Desktop: Install Docker Desktop
